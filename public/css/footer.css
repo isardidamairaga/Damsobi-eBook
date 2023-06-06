@@ -1,0 +1,9 @@
+footer {
+    height: 100px;
+    background-color: #0B0D17;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}

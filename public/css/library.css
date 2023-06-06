@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap');
+
+
+
+.library {
+    margin-top: 2.5%;
+
+
+}
+
+.library button {
+    font-size: 9px;
+    margin-right: 10px;
+}
+
+.link-book {
+    margin-top: 2%;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.link-book:hover {
+    transform: scale(1.05);
+}
+
+.card-book {
+    overflow: hidden;
+    width: 120px;
+    height: 200px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 10px 10px 4px #e8e8e7;
+}
+
+.author {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: #B4A5A3;
+}
+
+.cover-book {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    aspect-ratio: 1/1;
+}
+
+.judul-buku {
+    color: black;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+
+}
+
+.judul-kategori {
+    margin-top: 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+}
