@@ -6,12 +6,11 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AppLayout extends Component
+class IndexLayout extends Component
 {
     /**
      * Create a new component instance.
      */
-
     public $title;
     public function __construct($title)
     {
@@ -23,6 +22,6 @@ class AppLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('dashboard.user.layouts.app');
+        return view('auth.layouts.index');
     }
 }

@@ -25,6 +25,6 @@ class Navbar extends Component
             'Home' => '/',
             'Library' => '/library'
         ];
-        return view('layouts.navbar', compact('navbar'));
+        return view('dashboard.user.layouts.navbar', compact('navbar'));
     }
 }

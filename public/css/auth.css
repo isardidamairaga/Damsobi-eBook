@@ -1,0 +1,145 @@
+.container {
+    height: 100vh;
+}
+
+.container img {
+    width: 30%;
+    height: auto;
+    margin-top: 6%;
+    margin-left: 3%;
+}
+
+.navbar {
+    margin-right: 5.5%;
+}
+
+.navbar a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar a.active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -2px;
+    width: 25%;
+    border-bottom: 2px solid;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+
+
+.navbar a:hover {
+    color: #8397fa;
+}
+
+
+.navbar a {
+    text-decoration: none;
+    color: #4461F2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.hero {
+    margin-top: 8%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.overlay {
+    position: absolute;
+    margin-left: 7%;
+    margin-top: 10%;
+    z-index: -1;
+    width: 226px;
+    height: 226px;
+    filter: blur(100px);
+    border-radius: 50%;
+    background-color: #FFD803;
+}
+
+.signin {
+    position: relative;
+
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.text-signin p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+
+.register {
+    text-decoration: none;
+}
+
+.register-1 {
+
+    display: flex;
+    width: 90px;
+    height: 32px;
+    box-shadow: 2px 5px 10px #d5d5d5;
+    background-color: white;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease;
+
+}
+
+.register-1:hover {
+    background-color: #f9f8f8;
+}
+
+
+.form-group {
+    width: 300px;
+    margin-bottom: 5%;
+
+}
+
+.form-signin a {
+    text-decoration: none;
+    text-align: end;
+    color: #C7C7C7;
+    font-size: 10px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.form-group input {
+    height: 45px;
+    border: none;
+    background-color: #EAF0F7;
+}
+
+.form-group input::placeholder {
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    margin: auto;
+}
+
+.btn {
+    margin-top: 10px;
+    width: 300px;
+    height: 45px;
+    font-size: 14px !important;
+    font-family: 'Poppins', sans-serif !important;
+    color: white !important;
+    background-color: #4461F2 !important;
+    box-shadow: 10px 10px 15px #e8e8e7;
+}
+
+.form-signin {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -3%;
+
+}
