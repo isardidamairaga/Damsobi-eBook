@@ -16,8 +16,7 @@ class RegistrationController extends Controller
 
     public function store(RegistrationRequest $request)
     {
-
         User::create($request->all());
-        return redirect()->back()->with('success', 'Thank you, you are now registered.');
+        return redirect('/login')->with('success', 'Thank you, you are now registered.');
     }
 }

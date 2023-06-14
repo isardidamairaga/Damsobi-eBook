@@ -14,22 +14,23 @@
                 <div class="overlay"></div>
                 <img src="images/Picture.svg" alt="">
                 <div class="form-signin mt-3 ">
-                    @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session()->get('success') }}
-                        </div>
-                    @endif
+
 
                     <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input type="name" id="name" placeholder="Enter your name" name="name"
-                                class="form-control" required>
+                                class="form-control" required value="{{ old('name') }}">
+                            @error('name')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
 
                         </div>
                         <div class="form-group">
                             <input type="username" id="username" placeholder="Enter your username" name="username"
-                                class="form-control" required>
+                                class="form-control" required value="{{ old('username') }}">
                             @error('username')
                                 <div class="text-danger mt-2">
                                     {{ $message }}
@@ -38,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" placeholder="Enter your email" name="email"
-                                class="form-control" required>
+                                class="form-control" required value="{{ old('email') }}">
                             @error('email')
                                 <div class="text-danger mt-2">
                                     {{ $message }}
@@ -48,6 +49,11 @@
                         <div class="form-group">
                             <input type="password" placeholder="Enter your password" id="password" name="password"
                                 class="form-control" required>
+                            @error('password')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="d-flex flex-column">
                             <a href="/login">Already have an account?</a>
