@@ -13,15 +13,30 @@
                 <div class="overlay"></div>
                 <img src="images/Picture.svg" alt="">
                 <div class="form-signin ">
-                    <form action="/login" method="POST">
+                    <form action="{{ route('login') }}" method="POST">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
                         @csrf
                         <div class="form-group">
                             <input type="email" id="email" placeholder="Enter your email" name="email"
-                                class="form-control" required>
+                                class="form-control" required value="{{ old('email') }}">
+                            @error('email')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Enter your password" id="password" name="password"
                                 class="form-control" required>
+                            @error('password')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="d-flex flex-column">
                             <a href="/register"> don't have an account?</a>
