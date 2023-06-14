@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -15,15 +13,17 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        $user = User::whereEmail($request->email)->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                Auth::login($user);
-                return redirect('/')->with('success', 'You are now logged in.');
-            }
+        $attributes = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($attributes)) {
+            return redirect('/');
         }
+
         throw ValidationException::withMessages([
             'email' => 'Your provide credentials does not match our records.'
         ]);
