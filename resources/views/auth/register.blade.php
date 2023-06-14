@@ -1,4 +1,4 @@
-<x-index-layout title="Login">
+<x-index-layout title="Register">
     @section('container')
         <div class="container d-flex  flex-column m-auto">
             <div class="navbar d-flex justify-content-end mt-5 gap-5 ">
@@ -14,22 +14,39 @@
                 <div class="overlay"></div>
                 <img src="images/Picture.svg" alt="">
                 <div class="form-signin mt-3 ">
-                    <form action="/register" method="POST">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('register') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input type="name" id="name" placeholder="Enter your name" name="name"
                                 class="form-control" required>
+
+                        </div>
+                        <div class="form-group">
+                            <input type="username" id="username" placeholder="Enter your username" name="username"
+                                class="form-control" required>
+                            @error('username')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" placeholder="Enter your email" name="email"
                                 class="form-control" required>
+                            @error('email')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="Enter your password" id="password" name="password"
-                                class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Confirm your password" id="password" name="password"
                                 class="form-control" required>
                         </div>
                         <div class="d-flex flex-column">
