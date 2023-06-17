@@ -19,7 +19,7 @@
                 </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="dashboard/posts" class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
+            <a href="/dashboard/posts" class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
                 <span class="material-symbols-sharp">
                     add
                 </span>
