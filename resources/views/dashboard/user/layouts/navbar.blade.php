@@ -15,13 +15,41 @@
                     </li>
                 @endforeach
             </ul>
-            <div class="d-flex gap-5 ">
+            <div class="d-flex align-items-center gap-5 ">
                 <form class="d-flex" role="search">
                     <input class="form-control " type="search" placeholder="Search book, author, category"
                         aria-label="Search">
                 </form>
-                <img src="https://ui-avatars.com/api/?background=random&name=isardi" class="rounded-circle"
-                    alt="Profile Picture">
+                @guest
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item ">
+                            <a class="nav-link me-5" aria-current="page" href="{{ route('login') }}">SignIn</a>
+                        </li>
+                    </ul>
+                @else
+                    <div class="dropdown">
+                        <a class="d-flex btn  " href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <p class="username m-auto">{{ auth()->user()->username }}</p>
+                            @if (auth()->user()->avatar)
+                                <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="w-10 h-10 rounded-circle"
+                                    alt="Profile Picture">
+                            @else
+                                <img src="https://ui-avatars.com/api/?background=random&name={{ auth()->user()->name }}"
+                                    class="rounded-circle" alt="Profile Picture">
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @endguest
             </div>
         </div>
     </div>
