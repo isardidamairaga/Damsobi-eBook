@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
@@ -23,7 +24,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        return \view("dashboard.admin.book.create");
+        $categories = Category::all(["id", "category"]);
+        return \view("dashboard.admin.book.create", ["categories" => $categories]);
     }
 
     /**
