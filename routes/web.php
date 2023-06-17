@@ -35,10 +35,14 @@ Route::get('/bookpage', function () {
     return view('dashboard.user.bookpage');
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('register', [RegistrationControllertroller::class, 'create'])->name('register');
-    Route::post('register', [RegistrationController::class, 'store']);
+// Route::middleware('guest')->group(function () {
+//     Route::get('register', [RegistrationControllertroller::class, 'create'])->name('register');
+//     Route::post('register', [RegistrationController::class, 'store']);
 
-    Route::get('login', [LoginControllertroller::class, 'create'])->name('login');
-    Route::post('login', [LoginController::class, 'store']);
-});
+//     Route::get('login', [LoginControllertroller::class, 'create'])->name('login');
+//     Route::post('login', [LoginController::class, 'store']);
+// });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
