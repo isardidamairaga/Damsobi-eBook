@@ -6,17 +6,12 @@ use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    function __construct()
     {
-        //
+        $this->middleware("is.admin");
     }
 
     /**
@@ -24,7 +19,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return \view("dashboard.admin.addbook");
     }
 
     /**
@@ -40,7 +35,7 @@ class BookController extends Controller
         }
         
         // TODO: ganti redirect sesuai keinginan
-        return \redirect("books")->with("success", "Book has been successfully created");
+        return \redirect("/dashboard/books")->with("success", "Book has been successfully created");
     }
 
     /**
@@ -56,7 +51,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+         return view("dashboard.admin.addbook", \compact($book));
     }
 
     /**
@@ -65,7 +60,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         $book->fill($request->validated());
-        $isUpdated =  $book->saveOrFail();
+        $isUpdated =  $book->save();
         if(!$isUpdated) {
             return back()->with("error", "Oops, Update book failed. :(");
         }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,4 +45,14 @@ Route::get('/bookpage', function () {
 //     Route::post('login', [LoginController::class, 'store']);
 // });
 
+Route::prefix("dashboard")->middleware("auth")->group(function () {
+    Route::resource("books", BookController::class);
+});
+
 Auth::routes();
+
+Route::prefix("testing")->group(function () {
+    Route::get('/addbook', function () {
+        return view('dashboard.admin.addbook');
+    });
+});
