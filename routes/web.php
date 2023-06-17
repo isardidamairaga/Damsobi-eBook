@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Admin\BookController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +45,12 @@ Route::get('/bookpage', function () {
 //     Route::post('login', [LoginController::class, 'store']);
 // });
 
-Route::prefix("dashboard")->middleware("auth")->group(function () {
-    Route::resource("books", BookController::class);
-});
+Route::as("admin.")
+    ->prefix("dashboard")
+    ->middleware(['auth', 'is.admin'])
+    ->group(function () {
+        Route::resource("books", BookController::class)->names("books");
+    });
 
 Auth::routes();
 

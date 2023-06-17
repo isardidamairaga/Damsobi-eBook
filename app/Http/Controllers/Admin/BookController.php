@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
@@ -9,9 +10,12 @@ use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
 {
-    function __construct()
+    /**
+     * Show all resources.
+     */
+    public function index()
     {
-        $this->middleware("is.admin");
+        return \view("dashboard.admin.addbook");
     }
 
     /**
@@ -31,11 +35,11 @@ class BookController extends Controller
         
         $book = Book::create($payload);
         if(!$book) {
-            return back()->with("message", "Internal Server Error");
+            return back()->with("error", "Internal Server Error");
         }
         
         // TODO: ganti redirect sesuai keinginan
-        return \redirect("/dashboard/books")->with("success", "Book has been successfully created");
+        return \redirect("admin.books.index")->with("status", "Book has been successfully created");
     }
 
     /**
@@ -43,7 +47,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -76,7 +80,7 @@ class BookController extends Controller
         try {
             $book->deleteOrFail();
             
-            return redirect("books")->with("success", "Book has been successfully deleted");
+            return back()->with("status", "Book has been successfully deleted");
         } catch (\Throwable $th) {
             return back()->with("error", "Delete book failed: " . $th->getMessage());
         }
