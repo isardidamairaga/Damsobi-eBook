@@ -36,7 +36,7 @@ Route::get('/bookpage', function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegistrationControllerontrollertroller::class, 'create'])->name('register');
+    Route::get('register', [RegistrationController::class, 'create'])->name('register');
     Route::post('register', [RegistrationController::class, 'store']);
 
     Route::get('login', [LoginControllerrollertroller::class, 'create'])->name('login');
