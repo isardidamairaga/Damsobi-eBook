@@ -37,7 +37,7 @@ Route::get('/bookpage', function () {
     return view('dashboard.user.bookpage');
 });
 
-Route::as("admin.")
+Route::as("dashboard.")
     ->prefix("dashboard")
     ->middleware(['auth', 'is.admin'])
     ->group(function () {

@@ -39,7 +39,7 @@ class BookController extends Controller
         }
         
         // TODO: ganti redirect sesuai keinginan
-        return \redirect("admin.books.index")->with("status", "Book has been successfully created");
+        return \redirect("dashboard.books.index")->with("status", "Book has been successfully created");
     }
 
     /**

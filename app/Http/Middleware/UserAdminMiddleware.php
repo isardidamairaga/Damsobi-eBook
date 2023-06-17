@@ -18,7 +18,7 @@ class UserAdminMiddleware
     {
         $user = $request->user("web");
         if (!$user->isAdmin) {
-            throw new UnauthorizedException();
+            abort(401);
         }
 
         return $next($request);
