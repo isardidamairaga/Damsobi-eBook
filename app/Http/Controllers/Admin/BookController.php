@@ -23,7 +23,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return \view("dashboard.admin.addbook");
+        return \view("dashboard.admin.book.create");
     }
 
     /**

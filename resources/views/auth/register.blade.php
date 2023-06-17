@@ -55,6 +55,15 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Re enter your password again" id="password_confirmation" name="password_confirmation"
+                                class="form-control" required>
+                            @error('password_confirmation')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="d-flex flex-column">
                             <a href="/login">Already have an account?</a>
                             <button type="submit" class="btn ">Register</button>
