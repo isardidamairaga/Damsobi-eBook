@@ -39,8 +39,8 @@
             </div>
             <div class="recent-login">
                 <h2>Recent Login</h2>
-                <table>
-                    <thead class="halodek">
+                <table class="user">
+                    <thead >
                         <tr>
                             <th>No.</th>
                             <th>Name</th>
@@ -63,31 +63,7 @@
             </div>
         </main>
         <div class="right">
-            <div class="top">
-                <button id="menu-btn">
-                    <span class="material-symbols-sharp active">
-                        menu
-                    </span>
-                </button>
-                <div class="theme-togler">
-                    <span class="material-symbols-sharp active">
-                        light_mode
-                    </span>
-                    <span class="material-symbols-sharp">
-                        dark_mode
-                    </span>
-                </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Hey, <b>Isardi Dama Iraga</b>
-                            <small class="text-muted">Admin</small>
-                        </p>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="{{ asset('images/cover.jpeg') }}" alt="">
-                    </div>
-                </div>
-            </div>
+        @include('dashboard.admin.layouts.header')
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
                 <div class="updates">
