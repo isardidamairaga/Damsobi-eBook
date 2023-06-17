@@ -4,7 +4,7 @@
         <h1>List Book</h1>
         <div class="recent-login">
 
-            <a href="/dashboard/upload">
+            <a href="{{ route("dashboard.books.create") }}">
                 <div class="btn addbook">
                     <span class="material-symbols-sharp add">
                         add
