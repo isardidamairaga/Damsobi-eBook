@@ -1,4 +1,4 @@
-<div class="container">
+<div class="content">
     <aside>
         <div class="top">
             <div class="logo">
@@ -13,13 +13,13 @@
         </div>
 
         <div class="sidebar">
-            <a href="#" class="active">
+            <a href="/dashboard" class=" {{ Request::is('dashboard') ? 'active' : '' }}">
                 <span class=" material-symbols-sharp">
                     grid_view
                 </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="#">
+            <a href="dashboard/posts" class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
                 <span class="material-symbols-sharp">
                     add
                 </span>
