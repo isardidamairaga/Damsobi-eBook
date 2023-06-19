@@ -12,13 +12,15 @@ class Book extends Model
 
     protected $fillable = [
         "title",
+        "author",
         "book_url",
         "cover_url",
         "sipnosis",
         "category_id"
     ];
 
-    public function category() : BelongsTo {
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 }

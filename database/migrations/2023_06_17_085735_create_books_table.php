@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string("title");
+            $table->string("author");
             $table->string("book_url")->nullable();
             $table->string("cover_url")->nullable();
             $table->text("sipnosis")->nullable();
-            $table->foreignId("category_id")->constrained("categories")->nullOnDelete();
+            $table->foreignId("category_id")->constrained("categories")->cascadeOnDelete();
             $table->timestamps();
         });
     }
