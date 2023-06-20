@@ -26,7 +26,7 @@ class CreateBookRequest extends FormRequest
             "author" => ['required', "string"],
             "book_file" => ['required', "mimes:pdf", "max:2092"],
             "cover_image" => ['required', "mimes:jpg,png", "max:2092"],
-            "sipnosis" => ['required', "string"],
+            "sinopsis" => ['required', "string"],
             "category_id" => ['required', "exists:categories,id"],
         ];
     }
