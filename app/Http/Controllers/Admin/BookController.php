@@ -16,7 +16,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        return \view("dashboard.admin.addbook");
+        $Book = Book::paginate(10);
+        return \view("dashboard.admin.addbook", compact('Book'));
     }
 
     /**
@@ -34,14 +35,14 @@ class BookController extends Controller
     public function store(CreateBookRequest $request): RedirectResponse
     {
         $payload = $request->validated();
-        
+
         $book = Book::create($payload);
-        if(!$book) {
+        if (!$book) {
             return back()->with("error", "Internal Server Error");
         }
-        
+
         // TODO: ganti redirect sesuai keinginan
-        return \redirect("dashboard.books.index")->with("status", "Book has been successfully created");
+        return \redirect("/dashboard/books")->with("status", "Book has been successfully created");
     }
 
     /**
@@ -57,7 +58,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-         return view("dashboard.admin.addbook", \compact($book));
+        $categories = Category::all(["id", "category"]);
+        return view("dashboard.admin.book.update", ['book' => $book, "categories" => $categories]);
     }
 
     /**
@@ -67,11 +69,11 @@ class BookController extends Controller
     {
         $book->fill($request->validated());
         $isUpdated =  $book->save();
-        if(!$isUpdated) {
+        if (!$isUpdated) {
             return back()->with("error", "Oops, Update book failed. :(");
         }
-        
-        return \redirect("books")->with("status", "Book has been successfully updated.");
+
+        return \redirect("dashboard/books")->with("status", "Book has been successfully updated.");
     }
 
     /**
@@ -81,7 +83,7 @@ class BookController extends Controller
     {
         try {
             $book->deleteOrFail();
-            
+
             return back()->with("status", "Book has been successfully deleted");
         } catch (\Throwable $th) {
             return back()->with("error", "Delete book failed: " . $th->getMessage());
