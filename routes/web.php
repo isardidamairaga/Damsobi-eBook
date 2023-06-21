@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,18 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::get('/', function () {
-    return view('dashboard.admin.dashboard');
-});
 
 Route::get('/library', function () {
     return view('dashboard.user.library');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', LogoutController::class)->name('logout');
-});
+
 
 Route::get('/bookpage', function () {
     return view('dashboard.user.bookpage');
@@ -43,6 +40,7 @@ Route::as("dashboard.")
     ->group(function () {
         Route::resource("books", BookController::class)->names("books");
     });
+
 
 Auth::routes();
 
@@ -58,4 +56,8 @@ Route::middleware('guest')->group(function () {
 
     // Route::get('login', [LoginController::class, 'create'])->name('login');
     // Route::post('login', [LoginController::class, 'store']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', LogoutController::class)->name('logout');
 });
