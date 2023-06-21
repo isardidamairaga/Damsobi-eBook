@@ -10,7 +10,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Total Buku</h3>
-                            <h1>100</h1>
+                            <h1>{{ $totalBooks }}</h1>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Buku Fiksi</h3>
-                            <h1>100</h1>
+                            <h1>{{ $totalFiksi }}</h1>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="middle">
                         <div class="left">
                             <h3>Buku Non-Fiksi</h3>
-                            <h1>100</h1>
+                            <h1>{{ $totalNonFiksi }}</h1>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
             <div class="recent-login">
                 <h2>Recent Login</h2>
                 <table class="user">
-                    <thead >
+                    <thead>
                         <tr>
                             <th>No.</th>
                             <th>Name</th>
@@ -59,11 +59,10 @@
                         @endfor
                     </tbody>
                 </table>
-                <a href="#">Show All</a>
             </div>
         </main>
         <div class="right">
-        @include('dashboard.admin.layouts.header')
+            @include('dashboard.admin.layouts.header')
             <div class="recent-updates">
                 <h2>Recent Updates</h2>
                 <div class="updates">

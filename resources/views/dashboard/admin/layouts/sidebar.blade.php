@@ -19,18 +19,24 @@
                 </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="{{ route("dashboard.books.index") }}" class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
+            <a href="{{ route('dashboard.books.index') }}"
+                class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
                 <span class="material-symbols-sharp">
                     add
                 </span>
                 <h3>Add Book</h3>
             </a>
-            <a href="#">
-                <span class="material-symbols-sharp">
-                    logout
-                </span>
-                <h3>Logout</h3>
-            </a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="logout">
+                    <a>
+                        <span class="material-symbols-sharp">
+                            logout
+                        </span>
+                        <h3>Logout</h3>
+                    </a>
+                </button>
+            </form>
         </div>
     </aside>
     @yield('container')
