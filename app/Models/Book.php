@@ -15,7 +15,7 @@ class Book extends Model
         "author",
         "book_url",
         "cover_url",
-        "sipnosis",
+        "sinopsis",
         "category_id"
     ];
 

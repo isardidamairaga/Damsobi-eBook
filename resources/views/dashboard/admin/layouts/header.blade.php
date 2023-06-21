@@ -14,8 +14,12 @@
                 </div>
                 <div class="profile">
                     <div class="info">
-                        <p>Hey, <b>Isardi Dama Iraga</b>
-                            <small class="text-muted">Admin</small>
+                        <p>Hey, <b>{{ auth()->user()->name }}</b><br>
+                            <small class="text-muted">
+                                @if (auth()->user()->isAadmin = true)
+                                    Admin
+                                @endif
+                            </small>
                         </p>
                     </div>
                     <div class="profile-photo">

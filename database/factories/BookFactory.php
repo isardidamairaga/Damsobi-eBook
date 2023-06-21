@@ -19,9 +19,10 @@ class BookFactory extends Factory
     {
         return [
             "title" => $this->faker->word(3),
+            "author" => $this->faker->name(),
             "book_url" => $this->faker->url(),
-            "cover_url" => $this->faker->imageUrl(category:"book"),
-            "sipnosis" => $this->faker->realTextBetween(100, 500),
+            "cover_url" => $this->faker->imageUrl(category: "book"),
+            "sinopsis" => $this->faker->realTextBetween(100, 500),
             "category_id" => Category::all()->pluck('id')->random(),
         ];
     }
