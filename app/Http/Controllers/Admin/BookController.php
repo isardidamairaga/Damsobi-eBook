@@ -7,6 +7,8 @@ use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
+use Intervention\Image\Facades\Image;
+use Ilovepdf\Ilovepdf;
 use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
@@ -35,7 +37,29 @@ class BookController extends Controller
     public function store(CreateBookRequest $request): RedirectResponse
     {
         $payload = $request->validated();
-
+        // COMPRESS IMAGES FILES
+        $x = 1;
+        if ($request->hasFile('cover_url')) {
+            $file = $request->file("cover_url");
+            $file_name = $file->getClientOriginalName();
+            $img = Image::make($file);
+            $img->save(storage_path('app/public/images/' . $file_name), $x);
+        }
+        // COMPRESS PDF FILES
+        $ilovepdf = new Ilovepdf('project_public_e59f032d21506888e88728f5e4779b86_l1mjT54cc0c1846605ba3c4267f771c217193', 'secret_key_886a13d92a554ea208991863325a36c6_ChLQG0061b50bc3e469dc370825627c102fa6');
+        if ($request->hasFile('book_url')) {
+            $file = $request->file('book_url');
+            $upload = $file->store('book');
+            $file_name = $file->getClientOriginalName();
+            $task = $ilovepdf->newTask('compress');
+            $task->setCompressionLevel('extreme');
+            $task->addFile(storage_path('app/public/' . $upload));
+            $task->setOutputFilename($file_name);
+            $task->execute();
+            $downloadPath = storage_path('app/public/book/');
+            $task->download($downloadPath);
+            unlink(storage_path('app/public/' . $upload));
+        }
         $book = Book::create($payload);
         if (!$book) {
             return back()->with("error", "Internal Server Error");
@@ -88,5 +112,8 @@ class BookController extends Controller
         } catch (\Throwable $th) {
             return back()->with("error", "Delete book failed: " . $th->getMessage());
         }
+    }
+    public function compressPdf($inputPath, $outputPath)
+    {
     }
 }
