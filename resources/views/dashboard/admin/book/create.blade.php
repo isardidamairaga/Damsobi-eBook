@@ -28,8 +28,8 @@
                         <div class="form-group mt-4">
                             <div class="drop-zone">
                                 <span class="drop-zone__prompt">Drag File Here or Click to Upload PDF File</span>
-                                <input type="file" name="book_url" id="image" accept="application/pdf" required>
-                                @error('book_url')
+                                <input type="file" name="book_file" id="image" accept="application/pdf" required>
+                                @error('book_file')
                                     <div class="text-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <div class="drop-zone cover">
                                 <span class="drop-zone__prompt">Drag File Here or Click to Upload Cover Image</span>
-                                <input type="file" name="cover_url" id="image" accept="image/*">
+                                <input type="file" name="cover_image" id="image" accept="image/*">
                             </div>
                         </div>
                     </div>

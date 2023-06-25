@@ -5,14 +5,28 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Jobs\CompressPDF;
 use App\Models\Book;
 use App\Models\Category;
+use Error;
 use Intervention\Image\Facades\Image;
 use Ilovepdf\Ilovepdf;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
+    private string $iLovePDFProjectId;
+    private string $iLovePDFSecret;
+
+    public function __construct()
+    {
+        $this->iLovePDFProjectId = env("ILOVEPDF_PROJECT_ID");
+        $this->iLovePDFSecret = env("ILOVEPDF_SECRET_KEY");
+        if (!$this->iLovePDFProjectId || !$this->iLovePDFSecret) {
+            throw new Error("ILOVE PDF: project id and project secret required.");
+        }
+    }
     /**
      * Show all resources.
      */
@@ -37,36 +51,38 @@ class BookController extends Controller
     public function store(CreateBookRequest $request): RedirectResponse
     {
         $payload = $request->validated();
+        $this->createDirectoryIfNotExist();
+
         // COMPRESS IMAGES FILES
         $x = 1;
-        if ($request->hasFile('cover_url')) {
-            $file = $request->file("cover_url");
+        if ($request->hasFile('cover_image')) {
+            $file = $request->file("cover_image");
             $file_name = $file->getClientOriginalName();
             $img = Image::make($file);
-            $img->save(storage_path('app/public/images/' . $file_name), $x);
+            $compressedFilePath = \storage_path('app/public/images/' . $file_name);
+            $img->save($compressedFilePath, $x);
+            $url = Storage::url($compressedFilePath);
+            $payload['cover_url'] = $url;
         }
-        // COMPRESS PDF FILES
-        $ilovepdf = new Ilovepdf('project_public_e59f032d21506888e88728f5e4779b86_l1mjT54cc0c1846605ba3c4267f771c217193', 'secret_key_886a13d92a554ea208991863325a36c6_ChLQG0061b50bc3e469dc370825627c102fa6');
-        if ($request->hasFile('book_url')) {
-            $file = $request->file('book_url');
-            $upload = $file->store('book');
-            $file_name = $file->getClientOriginalName();
-            $task = $ilovepdf->newTask('compress');
-            $task->setCompressionLevel('extreme');
-            $task->addFile(storage_path('app/public/' . $upload));
-            $task->setOutputFilename($file_name);
-            $task->execute();
-            $downloadPath = storage_path('app/public/book/');
-            $task->download($downloadPath);
-            unlink(storage_path('app/public/' . $upload));
-        }
+
         $book = Book::create($payload);
+
         if (!$book) {
             return back()->with("error", "Internal Server Error");
         }
+        // COMPRESS PDF FILES
 
-        // TODO: ganti redirect sesuai keinginan
-        return \redirect("/dashboard/books")->with("status", "Book has been successfully created");
+        $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
+
+        if ($request->hasFile('book_file')) {
+            $relativeFilePath = $request->file('book_file')->store("book");
+            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+
+            // Run compress pdf Job
+            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
+        }
+
+        return \redirect()->route("dashboard.books.index")->with("status", "Book has been successfully created");
     }
 
     /**
@@ -91,13 +107,39 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $book->fill($request->validated());
+        $payload = $request->validated();
+        $book->fill($payload);
+
+        // COMPRESS IMAGES FILES
+        // TODO: Run the compression task into a Job (asyncronusly)
+        $quality = 1;
+        if ($request->hasFile('cover_image')) {
+            $file = $request->file("cover_image");
+            $file_name = $file->getClientOriginalName();
+            $img = Image::make($file);
+            $compressedFilePath = \storage_path('app/public/images/' . $file_name);
+            $img->save($compressedFilePath, $quality);
+            $url = Storage::url($compressedFilePath);
+            $payload['cover_url'] = $url;
+        }
+
         $isUpdated =  $book->save();
         if (!$isUpdated) {
             return back()->with("error", "Oops, Update book failed. :(");
         }
 
-        return \redirect("dashboard/books")->with("status", "Book has been successfully updated.");
+        // COMPRESS PDF FILES
+        $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
+
+        if ($request->hasFile('book_file')) {
+            $relativeFilePath = $request->file('book_file')->store("book");
+            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+
+            // Run compress pdf Job
+            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
+        }
+
+        return \redirect()->route("dashboard.books.index")->with("status", "Book has been successfully updated.");
     }
 
     /**
@@ -113,6 +155,19 @@ class BookController extends Controller
             return back()->with("error", "Delete book failed: " . $th->getMessage());
         }
     }
+
+    private function createDirectoryIfNotExist()
+    {
+        $dir1 = \storage_path("app/public/images");
+        $dir2 = \storage_path("app/public/book");
+        if (!Storage::directoryExists($dir1)) {
+            Storage::makeDirectory($dir1);
+        }
+        if (!Storage::directoryExists($dir2)) {
+            Storage::makeDirectory($dir2);
+        }
+    }
+
     public function compressPdf($inputPath, $outputPath)
     {
     }
