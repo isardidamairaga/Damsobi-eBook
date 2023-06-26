@@ -24,10 +24,10 @@ class CreateBookRequest extends FormRequest
         return [
             "title" => ['required', "string"],
             "author" => ['required', "string"],
-            "book_url" => ['required', "mimes:pdf"],
-            "cover_url" => ['required', "mimes:jpg,png", "max:2092"],
+            "book_file" => ['required',"file" ,"mimes:pdf"],
+            "cover_image" => ['required', "file","mimes:jpg,png"],
             "sinopsis" => ['required', "string"],
-            "category_id" => ['required', "exists:categories,id"],
+            "category_id" => ['required', "numeric", "exists:categories,id"],
         ];
     }
 }
