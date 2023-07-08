@@ -13,6 +13,27 @@
     margin-right: 10px;
 }
 
+select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+select option {
+    font-size: 14px;
+}
+
 .link-book {
     margin-top: 2%;
     text-decoration: none;
@@ -61,60 +82,61 @@
     font-size: 18px;
 }
 
-.context{
+.context {
     height: 350px;
     width: 80%;
-    margin:auto;
+    margin: auto;
     margin-top: 5rem;
 }
 
-.about-book{
+.about-book {
     border-radius: 15px;
     box-shadow: 20px 20px 10px #e8e8e7;
 }
 
-.book-cover img{
+.book-cover img {
     width: 150px;
     height: 200px;
     border-radius: 10px;
     background-size: cover;
 }
 
-.txt-info .judul{
-    font-family: 'poppins',sans-serif;
+.txt-info .judul {
+    font-family: 'poppins', sans-serif;
     font-weight: 800;
     font-size: 36px;
 }
 
 .txt-info p {
-    margin-bottom:5px;
+    margin-bottom: 5px;
     color: #bbbbbb;
-    font-family: 'poppins',sans-serif;
+    font-family: 'poppins', sans-serif;
     font-weight: 500;
     font-size: 16px;
 
 }
 
-.read{
+.read {
     width: 10rem !important;
     height: 3rem !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     border-radius: 13px !important;
-    background-color: #7380ec !important ;
+    background-color: #7380ec !important;
     color: white !important;
     border-color: #7380ec !important;
-   
+
     font-weight: 700 !important;
-    font-size: 16px!important;
-    transition: all 400ms ease ;
-}
-.read:hover{
-    background-color: #5868f4!important ;
+    font-size: 16px !important;
+    transition: all 400ms ease;
 }
 
-.description-book{
+.read:hover {
+    background-color: #5868f4 !important;
+}
+
+.description-book {
     background-color: white;
     padding: 50px;
     margin: auto;
@@ -123,31 +145,35 @@
     flex-wrap: wrap;
     width: 80%;
     box-shadow: 20px 20px 10px #e8e8e7;
-    
+
 }
 
-.description-book h1{
-    font-family: 'poppins',sans-serif;
+.description-book h1 {
+    font-family: 'poppins', sans-serif;
     font-weight: 600;
-    font-size: 36px ;
+    font-size: 36px;
 }
-.description-book p{
+
+.description-book p {
     height: 650px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: justify;
-  
-   
+
+
 }
- .baca{
+
+.baca {
     text-decoration: none;
     color: white;
 }
-iframe{
+
+iframe {
     width: 70%;
-    margin:auto;
+    margin: auto;
     height: 1000px;
 }
+
 .paginate {
     width: 80%;
     display: flex;
@@ -155,6 +181,7 @@ iframe{
     justify-content: end;
 
 }
-.paginate  nav{
+
+.paginate nav {
     background-color: #f6f6f9;
 }

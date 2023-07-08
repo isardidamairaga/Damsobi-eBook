@@ -14,6 +14,27 @@
 
 }
 
+
+
+.search-results {
+    border-radius: 10px;
+    position: absolute;
+    width: 250px;
+    top: 100%;
+    left: 80;
+    z-index: 999 !important;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+    /* Hide the search results by default */
+}
+
+.search-results.active {
+    display: block;
+    /* Show the search results when the 'active' class is added */
+}
+
 nav {
     background-color: white;
 }

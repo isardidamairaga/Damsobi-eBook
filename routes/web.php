@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\LibraryController;
+use App\Http\Controllers\User\SearchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,12 +27,12 @@ Route::as("dashboard.")
     ->group(function () {
         Route::get('/', function () {
             return view('dashboard.user.homepage');
-        });    
-        Route::get('library', [LibraryController::class,'index'])->name("library"); 
-        Route::get('book/{book}', [LibraryController::class,'show'])->name("bookpage");
-        Route::get('read/{book}', [LibraryController::class,'read'])->name("read");    
-
-      
+        });
+        Route::get('library', [LibraryController::class, 'index'])->name("library");
+        Route::get('/search', [SearchController::class, 'index'])->name("search");
+        Route::get('/filter', [SearchController::class, 'category'])->name('filter');
+        Route::get('book/{book}', [LibraryController::class, 'show'])->name("bookpage");
+        Route::get('read/{book}', [LibraryController::class, 'read'])->name("read");
     });
 
 

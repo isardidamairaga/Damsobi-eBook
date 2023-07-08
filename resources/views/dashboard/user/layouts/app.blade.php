@@ -14,6 +14,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/9be626d6af.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/flip.js') }}"></script>
 </head>
@@ -30,6 +31,44 @@
     </script>
     <script>
         AOS.init();
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                var query = $(this).val();
+                if (query.trim() !== '') {
+                    $.ajax({
+                        url: '{{ route('dashboard.search') }}',
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(response) {
+                            $('#search-results').html(response);
+                            $('#search-results').show(); // Show the search results
+                        }
+                    });
+                } else {
+                    $('#search-results').empty();
+                    $('#search-results').hide(); // Hide the search results
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#category-select').on('change', function() {
+                var selectedCategory = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('dashboard.filter') }}',
+                    method: 'GET',
+                    data: {
+                        category: selectedCategory
+                    },
+                    success: function(response) {
+                        $('#book-list').html(response);
+                    }
+                });
+            });
+        });
     </script>
 
 </body>

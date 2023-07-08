@@ -15,8 +15,7 @@
                     <a class="btn-explorer" href="/library"> <b>Explore Now</b></a>
                 </div>
             </div>
-            <img data-aos="fade-zoom-in" data-aos-delay="300" data-aos-duration="800" class="banner" src="images/Saly-3.svg"
-                alt="">
+            <img class="banner" src="images/Saly-3.svg" alt="">
         </div>
         <div class="d-flex flex-wrap justify-between group-card gap-4">
             <div class="card-1 d-flex flex-column flex-wrap ">
