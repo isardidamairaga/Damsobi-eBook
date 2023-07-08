@@ -18,7 +18,7 @@
     <script src="{{ asset('js/flip.js') }}"></script>
 </head>
 
-<body>
+<body style="background-color: #f6f6f9;">
     <div data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">
         <x-navbar></x-navbar>
     </div>

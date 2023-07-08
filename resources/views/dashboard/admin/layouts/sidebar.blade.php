@@ -13,13 +13,13 @@
         </div>
 
         <div class="sidebar">
-            <a href="/dashboard" class=" {{ Request::is('dashboard') ? 'active' : '' }}">
+            <a href="/admin/dashboard" class=" {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                 <span class=" material-symbols-sharp">
                     grid_view
                 </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="{{ route('dashboard.books.index') }}"
+            <a href="{{ route('admin.dashboard.books.index') }}"
                 class=" {{ Request::is('dashboard/posts') ? 'active' : '' }}">
                 <span class="material-symbols-sharp">
                     add

@@ -60,3 +60,101 @@
     font-weight: bold;
     font-size: 18px;
 }
+
+.context{
+    height: 350px;
+    width: 80%;
+    margin:auto;
+    margin-top: 5rem;
+}
+
+.about-book{
+    border-radius: 15px;
+    box-shadow: 20px 20px 10px #e8e8e7;
+}
+
+.book-cover img{
+    width: 150px;
+    height: 200px;
+    border-radius: 10px;
+    background-size: cover;
+}
+
+.txt-info .judul{
+    font-family: 'poppins',sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+}
+
+.txt-info p {
+    margin-bottom:5px;
+    color: #bbbbbb;
+    font-family: 'poppins',sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+
+}
+
+.read{
+    width: 10rem !important;
+    height: 3rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 13px !important;
+    background-color: #7380ec !important ;
+    color: white !important;
+    border-color: #7380ec !important;
+   
+    font-weight: 700 !important;
+    font-size: 16px!important;
+    transition: all 400ms ease ;
+}
+.read:hover{
+    background-color: #5868f4!important ;
+}
+
+.description-book{
+    background-color: white;
+    padding: 50px;
+    margin: auto;
+    border-radius: 15px;
+    height: 800px;
+    flex-wrap: wrap;
+    width: 80%;
+    box-shadow: 20px 20px 10px #e8e8e7;
+    
+}
+
+.description-book h1{
+    font-family: 'poppins',sans-serif;
+    font-weight: 600;
+    font-size: 36px ;
+}
+.description-book p{
+    height: 650px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+  
+   
+}
+ .baca{
+    text-decoration: none;
+    color: white;
+}
+iframe{
+    width: 70%;
+    margin:auto;
+    height: 1000px;
+}
+.paginate {
+    width: 80%;
+    display: flex;
+    margin-top: 3rem;
+    justify-content: end;
+
+}
+.paginate  nav{
+    background-color: #f6f6f9;
+}

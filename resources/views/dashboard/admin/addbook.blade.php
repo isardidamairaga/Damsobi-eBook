@@ -4,7 +4,7 @@
             <h1>List Book</h1>
             <div class="recent-login">
 
-                <a href="{{ route('dashboard.books.create') }}">
+                <a href="{{ route('admin.dashboard.books.create') }}">
                     <div class="btn addbook">
                         <span class="material-symbols-sharp add">
                             add
@@ -30,11 +30,11 @@
                                 <td>{{ $books->author }}</td>
                                 <td>
                                     <div class="d-flex action">
-                                        <a href="{{ route('dashboard.books.edit', ['book' => $books->id]) }}"><span
+                                        <a href="{{ route('admin.dashboard.books.edit', ['book' => $books->id]) }}"><span
                                                 class="material-symbols-sharp edit">
                                                 edit
                                             </span></a>
-                                        <form action="{{ route('dashboard.books.destroy', ['book' => $books->id]) }}"
+                                        <form action="{{ route('admin.dashboard.books.destroy', ['book' => $books->id]) }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')

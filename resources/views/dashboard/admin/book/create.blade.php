@@ -2,7 +2,7 @@
     @section('container')
         <main>
             <h1>Create New Book</h1>
-            <form action="{{ Route('dashboard.books.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ Route('admin.dashboard.books.store') }}" method="POST" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
                 <div class="merge-form d-flex gap-3 justify-content-center align-items-center ">

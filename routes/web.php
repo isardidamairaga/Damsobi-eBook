@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\User\LibraryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,41 +20,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
-
-
-Route::get('/library', function () {
-    return view('dashboard.user.library');
-});
-
-
-
-Route::get('/bookpage', function () {
-    return view('dashboard.user.bookpage');
-});
-
 Route::as("dashboard.")
     ->prefix("dashboard")
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', function () {
+            return view('dashboard.user.homepage');
+        });    
+        Route::get('library', [LibraryController::class,'index'])->name("library"); 
+        Route::get('book/{book}', [LibraryController::class,'show'])->name("bookpage");
+        Route::get('read/{book}', [LibraryController::class,'read'])->name("read");    
+
+      
+    });
+
+
+
+
+
+
+Route::as("admin.dashboard.")
+    ->prefix("admin/dashboard")
     ->middleware(['auth', 'is.admin'])
     ->group(function () {
+        Route::get('/', [DashboardController::class, 'index']);
         Route::resource("books", BookController::class)->names("books");
     });
 
-
 Auth::routes();
 
-Route::prefix("testing")->group(function () {
-    Route::get('/addbook', function () {
-        return view('dashboard.admin.addbook');
-    });
-});
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegistrationController::class, 'create'])->name('register');
     Route::post('register', [RegistrationController::class, 'store']);
-
     // Route::get('login', [LoginController::class, 'create'])->name('login');
     // Route::post('login', [LoginController::class, 'store']);
 });
