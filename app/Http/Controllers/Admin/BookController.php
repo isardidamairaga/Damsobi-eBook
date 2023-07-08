@@ -54,14 +54,16 @@ class BookController extends Controller
         $this->createDirectoryIfNotExist();
 
         // COMPRESS IMAGES FILES
-        $x = 1;
+        $x = 10;
         if ($request->hasFile('cover_image')) {
             $file = $request->file("cover_image");
             $file_name = $file->getClientOriginalName();
-            $img = Image::make($file);
-            $compressedFilePath = \storage_path('app/public/images/' . $file_name);
+            $img = Image::make($file); 
+            $storagePath = 'app/public/images/' . $file_name;
+            $publicPath = "storage/images/" . $file_name;
+            $compressedFilePath = \storage_path($storagePath);
             $img->save($compressedFilePath, $x);
-            $url = Storage::url($compressedFilePath);
+            $url = asset($publicPath); 
             $payload['cover_url'] = $url;
         }
 
@@ -82,7 +84,7 @@ class BookController extends Controller
             dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
         }
 
-        return \redirect()->route("dashboard.books.index")->with("status", "Book has been successfully created");
+        return \redirect()->route("admin.dashboard.books.index")->with("status", "Book has been successfully created");
     }
 
     /**
@@ -168,7 +170,5 @@ class BookController extends Controller
         }
     }
 
-    public function compressPdf($inputPath, $outputPath)
-    {
-    }
+
 }

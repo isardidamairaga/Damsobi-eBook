@@ -32,7 +32,7 @@ class CompressImage implements ShouldQueue
      */
     public function handle(): void
     {
-        $quality = 1;
+        $quality = 10;
         $img = Image::make($this->absolutePath);
         $compressedFilePath = \storage_path('app/public/images/' . \uniqid("compressed_"));
         $img->save($compressedFilePath, $quality);

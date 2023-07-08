@@ -25,7 +25,7 @@ class UpdateBookRequest extends FormRequest
             "title" => ["string"],
             "book_file" => ["file", "mimes:pdf", "max:2092"],
             "cover_image" => ["file", "mimes:jpg,png", "max:2092"],
-            "sipnosis" => ["string"],
+            "sinopsis" => ["string"],
             "category_id" => ["exists:categories,id"],
         ];
     }

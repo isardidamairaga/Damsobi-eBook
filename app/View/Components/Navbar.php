@@ -22,8 +22,8 @@ class Navbar extends Component
     public function render(): View|Closure|string
     {
         $navbar = [
-            'Home' => '/',
-            'Library' => '/library'
+            'Home' => '/dashboard',
+            'Library' => '/dashboard/library'
         ];
         return view('dashboard.user.layouts.navbar', compact('navbar'));
     }
