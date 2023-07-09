@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\User\LibraryController;
 use App\Http\Controllers\User\SearchController;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ Route::as("admin.dashboard.")
         Route::resource("books", BookController::class)->names("books");
     });
 
+Route::post('uploads/process', [FileUploadController::class, 'process'])->name('uploads.process');
 Auth::routes();
 
 

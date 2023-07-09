@@ -55,19 +55,19 @@ class BookController extends Controller
         $this->createDirectoryIfNotExist();
 
         // COMPRESS IMAGES FILES
-        $x = 10;
+        $quality = 10;
         if ($request->hasFile('cover_image')) {
             $file = $request->file("cover_image");
             $file_name = $file->getClientOriginalName();
-            $img = Image::make($file); 
+            $img = Image::make($file);
             $storagePath = 'app/public/images/' . $file_name;
             $publicPath = "storage/images/" . $file_name;
             $compressedFilePath = \storage_path($storagePath);
-            $img->save($compressedFilePath, $x);
-            $url = asset($publicPath); 
+            $img->save($compressedFilePath, $quality);
+            $url = asset($publicPath);
             $payload['cover_url'] = $url;
         }
-
+        $payload["book_url"] = asset("storage/" . $payload['book_file']);
         $book = Book::create($payload);
 
         if (!$book) {
@@ -77,13 +77,20 @@ class BookController extends Controller
 
         $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
 
-        if ($request->hasFile('book_file')) {
-            $relativeFilePath = $request->file('book_file')->store("book");
-            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+        $relativeFilePath = $request->book_file;
+        $absolutePath = \storage_path("app/public/" . $relativeFilePath);
 
-            // Run compress pdf Job
-            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-        }
+        // Run compress pdf Job
+        dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
+
+        // without asyncronus upload
+        // if ($request->hasFile('book_file')) {
+        // $relativeFilePath = $request->file('book_file')->store("book");
+        // $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+
+        // // Run compress pdf Job
+        // dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
+        // }
 
         return \redirect()->route("admin.dashboard.books.index")->with("status", "Book has been successfully created");
     }
@@ -111,6 +118,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         $payload = $request->validated();
+        $payload['book_url'] = \asset("storage/" . $payload['book_file']);
         $book->fill($payload);
 
         // COMPRESS IMAGES FILES
@@ -134,15 +142,13 @@ class BookController extends Controller
         // COMPRESS PDF FILES
         $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
 
-        if ($request->hasFile('book_file')) {
-            $relativeFilePath = $request->file('book_file')->store("book");
-            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+        $relativeFilePath = $request->book_file;
+        $absolutePath = \storage_path("app/public/" . $relativeFilePath);
 
-            // Run compress pdf Job
-            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-        }
+        // Run compress pdf Job
+        dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
 
-        return \redirect()->route("dashboard.books.index")->with("status", "Book has been successfully updated.");
+        return \redirect()->route('admin.dashboard.books.index')->with("status", "Book has been successfully updated.");
     }
 
     /**
@@ -151,7 +157,15 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         try {
+            // delete database record
             $book->deleteOrFail();
+
+            // delete file
+            $filePath = \str_replace(\asset("storage"), "", $book->book_url);
+            $deleted = Storage::delete($filePath);
+            if (!$deleted) {
+                throw new Error("Cannot delete the file");
+            }
 
             return back()->with("status", "Book has been successfully deleted");
         } catch (\Throwable $th) {
@@ -170,6 +184,4 @@ class BookController extends Controller
             File::makeDirectory($dir2);
         }
     }
-
-
 }

@@ -26,15 +26,25 @@
                             </select>
                         </div>
                         <div class="form-group mt-4">
-                            <div class="drop-zone">
-                                <span class="drop-zone__prompt">Drag File Here or Click to Upload PDF File</span>
-                                <input type="file" name="book_file" id="image" accept="application/pdf" required>
-                                @error('book_file')
-                                    <div class="text-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                            <input type="file" name="book_file" id="pdf" accept="application/pdf" required class="filepond"
+                                data-max-file-size="40MB">
+                            @error('book_file')
+                            <div class="text-danger mt-2">
+                                {{ $message }}
                             </div>
+                            @enderror
+
+                            {{-- OLD --}}
+                            {{-- <div class="drop-zone">
+                                <span class="drop-zone__prompt">Drag File Here or Click to Upload PDF File</span>
+                                <input type="file" name="book_file" id="pdf" accept="application/pdf" required
+                                    class="filepond" data-max-file-size="40MB">
+                                @error('book_file')
+                                <div class="text-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label for="synopsis">Sinopsis</label>

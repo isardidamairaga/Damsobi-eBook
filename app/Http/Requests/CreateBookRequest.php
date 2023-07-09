@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidFileUpload;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateBookRequest extends FormRequest
@@ -24,7 +25,7 @@ class CreateBookRequest extends FormRequest
         return [
             "title" => ['required', "string"],
             "author" => ['required', "string"],
-            "book_file" => ['required',"file" ,"mimes:pdf"],
+            "book_file" => ['required',"string", new ValidFileUpload(['application/pdf', 'pdf'])],
             "cover_image" => ['required', "file","mimes:jpg,png"],
             "sinopsis" => ['required', "string"],
             "category_id" => ['required', "numeric", "exists:categories,id"],
