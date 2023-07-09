@@ -50,6 +50,7 @@ Route::as("admin.dashboard.")
     });
 
 Route::post('uploads/process', [FileUploadController::class, 'process'])->name('uploads.process');
+Route::delete('uploads/revert', [FileUploadController::class, 'revert'])->name('uploads.revert');
 Auth::routes();
 
 

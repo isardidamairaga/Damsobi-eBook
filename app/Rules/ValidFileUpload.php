@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ValidFileUpload implements ValidationRule
 {
+    public function __construct(
+        private readonly array $validMimeTypes
+    ) {
+        //
+    }
+
     /**
      * Run the validation rule.
      *
@@ -19,6 +25,9 @@ class ValidFileUpload implements ValidationRule
     {
         if (!Storage::exists($value)) {
             $fail('The file does not exist.');
+        }
+        if (!in_array(Storage::mimeType($value), $this->validMimeTypes, true)) {
+            $fail('The file is not a valid mime type.');
         }
     }
 }

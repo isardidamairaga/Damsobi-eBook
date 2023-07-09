@@ -33,6 +33,7 @@ class BookController extends Controller
      */
     public function index()
     {
+        // TODO: Add caching mechanism
         $Book = Book::paginate(10);
         return \view("dashboard.admin.addbook", compact('Book'));
     }
@@ -73,7 +74,6 @@ class BookController extends Controller
         if (!$book) {
             return back()->with("error", "Internal Server Error");
         }
-        // COMPRESS PDF FILES
 
         $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
 
@@ -82,15 +82,6 @@ class BookController extends Controller
 
         // Run compress pdf Job
         dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-
-        // without asyncronus upload
-        // if ($request->hasFile('book_file')) {
-        // $relativeFilePath = $request->file('book_file')->store("book");
-        // $absolutePath = \storage_path("app/public/" . $relativeFilePath);
-
-        // // Run compress pdf Job
-        // dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-        // }
 
         return \redirect()->route("admin.dashboard.books.index")->with("status", "Book has been successfully created");
     }

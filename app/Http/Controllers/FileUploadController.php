@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileUploadController extends Controller
@@ -32,8 +34,21 @@ class FileUploadController extends Controller
 
         // Store the file in a temporary location and return the location
         // for FilePond to use.
-        return $file->store(
-            path: 'tmp/' . now()->timestamp . '-' . Str::random(20)
-        );
+        $folder = 'tmp/' . now()->timestamp . '-' . Str::random(20);
+        $fileName = \uniqid("pdf_") . '.pdf';
+        $filePath = $file->storeAs($folder, $fileName);
+
+        TemporaryFile::create([
+            "file_path" => $filePath,
+        ]);
+
+        return $filePath;
+    }
+
+    public function revert(Request $request): bool
+    {
+        $fileId = $request->getContent();
+        //use $fileId to delete file from filesystem 
+        return Storage::delete($fileId);
     }
 }
