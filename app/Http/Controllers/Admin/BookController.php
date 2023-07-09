@@ -12,6 +12,7 @@ use Error;
 use Intervention\Image\Facades\Image;
 use Ilovepdf\Ilovepdf;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -162,11 +163,11 @@ class BookController extends Controller
     {
         $dir1 = \storage_path("app/public/images");
         $dir2 = \storage_path("app/public/book");
-        if (!Storage::directoryExists($dir1)) {
-            Storage::makeDirectory($dir1);
+        if (!File::isDirectory($dir1)) {
+            File::makeDirectory($dir1);
         }
-        if (!Storage::directoryExists($dir2)) {
-            Storage::makeDirectory($dir2);
+        if (!File::isDirectory($dir2)) {
+            File::makeDirectory($dir2);
         }
     }
 
