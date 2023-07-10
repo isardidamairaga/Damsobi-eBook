@@ -53,6 +53,10 @@ Route::post('uploads/process', [FileUploadController::class, 'process'])->name('
 Route::delete('uploads/revert', [FileUploadController::class, 'revert'])->name('uploads.revert');
 Auth::routes();
 
+Route::get('/', function () {
+    return to_route('login');
+});
+
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegistrationController::class, 'create'])->name('register');
