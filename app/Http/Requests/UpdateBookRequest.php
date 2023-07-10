@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidFileUpload;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBookRequest extends FormRequest
@@ -23,7 +24,7 @@ class UpdateBookRequest extends FormRequest
     {
         return [
             "title" => ["string"],
-            "book_file" => ["file", "mimes:pdf", "max:2092"],
+            "book_file" => ['required',"string", new ValidFileUpload(['application/pdf', 'pdf'])],
             "cover_image" => ["file", "mimes:jpg,png", "max:2092"],
             "sinopsis" => ["string"],
             "category_id" => ["exists:categories,id"],

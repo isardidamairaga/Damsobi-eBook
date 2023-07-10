@@ -12,6 +12,7 @@ use Error;
 use Intervention\Image\Facades\Image;
 use Ilovepdf\Ilovepdf;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -32,6 +33,7 @@ class BookController extends Controller
      */
     public function index()
     {
+        // TODO: Add caching mechanism
         $Book = Book::paginate(10);
         return \view("dashboard.admin.addbook", compact('Book'));
     }
@@ -54,35 +56,32 @@ class BookController extends Controller
         $this->createDirectoryIfNotExist();
 
         // COMPRESS IMAGES FILES
-        $x = 10;
+        $quality = 10;
         if ($request->hasFile('cover_image')) {
             $file = $request->file("cover_image");
             $file_name = $file->getClientOriginalName();
-            $img = Image::make($file); 
+            $img = Image::make($file);
             $storagePath = 'app/public/images/' . $file_name;
             $publicPath = "storage/images/" . $file_name;
             $compressedFilePath = \storage_path($storagePath);
-            $img->save($compressedFilePath, $x);
-            $url = asset($publicPath); 
+            $img->save($compressedFilePath, $quality);
+            $url = asset($publicPath);
             $payload['cover_url'] = $url;
         }
-
+        $payload["book_url"] = asset("storage/" . $payload['book_file']);
         $book = Book::create($payload);
 
         if (!$book) {
             return back()->with("error", "Internal Server Error");
         }
-        // COMPRESS PDF FILES
 
         $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
 
-        if ($request->hasFile('book_file')) {
-            $relativeFilePath = $request->file('book_file')->store("book");
-            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+        $relativeFilePath = $request->book_file;
+        $absolutePath = \storage_path("app/public/" . $relativeFilePath);
 
-            // Run compress pdf Job
-            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-        }
+        // Run compress pdf Job
+        dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
 
         return \redirect()->route("admin.dashboard.books.index")->with("status", "Book has been successfully created");
     }
@@ -110,6 +109,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, Book $book)
     {
         $payload = $request->validated();
+        $payload['book_url'] = \asset("storage/" . $payload['book_file']);
         $book->fill($payload);
 
         // COMPRESS IMAGES FILES
@@ -133,15 +133,13 @@ class BookController extends Controller
         // COMPRESS PDF FILES
         $ilovepdf = new Ilovepdf($this->iLovePDFProjectId, $this->iLovePDFSecret);
 
-        if ($request->hasFile('book_file')) {
-            $relativeFilePath = $request->file('book_file')->store("book");
-            $absolutePath = \storage_path("app/public/" . $relativeFilePath);
+        $relativeFilePath = $request->book_file;
+        $absolutePath = \storage_path("app/public/" . $relativeFilePath);
 
-            // Run compress pdf Job
-            dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
-        }
+        // Run compress pdf Job
+        dispatch(new CompressPDF($book, $absolutePath, $ilovepdf));
 
-        return \redirect()->route("dashboard.books.index")->with("status", "Book has been successfully updated.");
+        return \redirect()->route('admin.dashboard.books.index')->with("status", "Book has been successfully updated.");
     }
 
     /**
@@ -150,7 +148,15 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         try {
+            // delete database record
             $book->deleteOrFail();
+
+            // delete file
+            $filePath = \str_replace(\asset("storage"), "", $book->book_url);
+            $deleted = Storage::delete($filePath);
+            if (!$deleted) {
+                throw new Error("Cannot delete the file");
+            }
 
             return back()->with("status", "Book has been successfully deleted");
         } catch (\Throwable $th) {
@@ -162,13 +168,11 @@ class BookController extends Controller
     {
         $dir1 = \storage_path("app/public/images");
         $dir2 = \storage_path("app/public/book");
-        if (!Storage::directoryExists($dir1)) {
-            Storage::makeDirectory($dir1);
+        if (!File::isDirectory($dir1)) {
+            File::makeDirectory($dir1);
         }
-        if (!Storage::directoryExists($dir2)) {
-            Storage::makeDirectory($dir2);
+        if (!File::isDirectory($dir2)) {
+            File::makeDirectory($dir2);
         }
     }
-
-
 }

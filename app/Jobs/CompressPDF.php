@@ -48,8 +48,8 @@ class CompressPDF implements ShouldQueue
      */
     public function handle(): void
     {
-        $fileName = uniqid("compressed_");
-        $publicPath = "storage/book/" . $fileName;
+        $fileName = uniqid("compressed_") . ".pdf";
+        $publicPath = "book/" . $fileName;
         $task = $this->ilovepdf->newTask('compress');
         $task->setCompressionLevel('extreme');
         $task->addFile($this->absolutePath);
@@ -57,7 +57,7 @@ class CompressPDF implements ShouldQueue
         $task->execute();
         $downloadPath = storage_path('app/public/book/');
         $task->download($downloadPath);
-        $url = Storage::url($publicPath);
+        $url = asset("storage/" . $publicPath);
         unlink($this->absolutePath);
 
         $this->book->fill([
