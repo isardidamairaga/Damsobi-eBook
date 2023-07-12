@@ -24,7 +24,7 @@
                     <tbody>
                         @foreach ($Book as $books)
                             <tr>
-                                <td>{{ $books->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $books->title }}</td>
                                 <td>{{ $books->category->category }}</td>
                                 <td>{{ $books->author }}</td>

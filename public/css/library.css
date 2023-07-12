@@ -72,6 +72,9 @@ select option {
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
 }
 

@@ -23,7 +23,7 @@
                         </p>
                     </div>
                     <div class="profile-photo">
-                        <img src="{{ asset('images/cover.jpeg') }}" alt="">
+                        <img src="{{ asset('images/3135715.png') }}" alt="">
                     </div>
                 </div>
             </div>
