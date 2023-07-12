@@ -6,7 +6,7 @@
                 <a href="{{ route('dashboard.bookpage', ['book' => $book->id]) }}" class="link-book">
                     <div class="d-flex">
                         <img class="buku-covers" src="{{ $book->cover_url }}" alt="">
-                        <div class="container pencarian d-flex flex-column">
+                        <div class="pencarian container  d-flex flex-column">
                             <p class="judul-buku ml-1 mt-2 mb-0">{{ $book->title }}</p>
                             <p class="author mb-0">{{ $book->author }}</p>
                         </div>

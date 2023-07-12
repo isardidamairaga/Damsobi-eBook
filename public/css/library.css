@@ -78,7 +78,7 @@ select option {
 }
 
 .pencarian {
-    width: 80%;
+    width: 80% !important;
 }
 
 .judul-kategori {
