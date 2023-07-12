@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> {{ $title }} | Damsobi</title>
+    <link rel="icon" href="{{ asset('images/Group 19.svg') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,7 +20,7 @@
 <body>
     <x-sidebar>
         @section('container')
-        @yield('container')
+            @yield('container')
         @endsection
     </x-sidebar>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -29,8 +30,8 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-    <script src="{{ asset('js/index.js')}}"></script>
-    @yield("scripts")
+    <script src="{{ asset('js/index.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>
