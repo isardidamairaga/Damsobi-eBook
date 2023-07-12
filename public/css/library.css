@@ -77,6 +77,10 @@ select option {
     white-space: nowrap;
 }
 
+.pencarian {
+    width: 80%;
+}
+
 .judul-kategori {
     margin-top: 20px;
     font-family: 'Work Sans', sans-serif;
