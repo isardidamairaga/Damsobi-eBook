@@ -19,7 +19,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => 'admin',
-            'email' => 'admin@karanganom.ids',
+            'email' => 'admin@karanganom.id',
             'email_verified_at' => now(),
             'username' => 'admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

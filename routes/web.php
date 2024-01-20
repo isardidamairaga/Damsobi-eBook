@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::as("dashboard.")
-    ->prefix("dashboard")
+    ->prefix("library")
     ->middleware(['auth','web','activity'])
     ->group(function () {
         // Route::get('/', function () {
