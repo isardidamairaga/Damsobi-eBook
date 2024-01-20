@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 
 class LoginController extends Controller
 {
@@ -21,6 +22,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    use ActivityLogger;
 
     /**
      * Where to redirect users after login.
@@ -39,15 +41,26 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login (LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $input = $request->validated();
-        if(auth()->attempt($input)){
-        if(auth()->user()->isAdmin){
-            return redirect()->route('admin.dashboard.');
-        }else{
-            return redirect('/dashboard'); 
+        
+       
+    
+        if (auth()->attempt($input)) {
+            $user = auth()->user();
+
+            if ($user->isAdmin) {
+    
+                return redirect()->route('admin.dashboard');
+               
+            } else {
+              
+                return redirect('/dashboard'); 
+            
+            }
         }
     }
-    }
+    
 
 }

@@ -24,9 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::as("dashboard.")
     ->prefix("dashboard")
-    ->middleware('auth')
+    ->middleware(['auth','web','activity'])
     ->group(function () {
         Route::get('/', function () {
+            
             return view('dashboard.user.homepage');
         });
         Route::get('library', [LibraryController::class, 'index'])->name("library");
@@ -37,7 +38,7 @@ Route::as("dashboard.")
     });
 
 
-
+Auth::routes();
 
 
 
@@ -48,10 +49,10 @@ Route::as("admin.dashboard.")
         Route::get('/', [DashboardController::class, 'index']);
         Route::resource("books", BookController::class)->names("books");
     });
-
+    
 Route::post('uploads/process', [FileUploadController::class, 'process'])->name('uploads.process');
 Route::delete('uploads/revert', [FileUploadController::class, 'revert'])->name('uploads.revert');
-Auth::routes();
+
 
 Route::get('/', function () {
     return to_route('login');
@@ -65,6 +66,6 @@ Route::middleware('guest')->group(function () {
     // Route::post('login', [LoginController::class, 'store']);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','web','activity'])->group(function () {
     Route::post('logout', LogoutController::class)->name('logout');
 });

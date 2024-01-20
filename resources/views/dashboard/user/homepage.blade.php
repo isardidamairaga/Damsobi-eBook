@@ -41,12 +41,7 @@
                 <img src="images/Saly-19.svg" alt="">
             </div>
         </div>
-        <div class="logos-1">
-            <div class="logos d-flex justify-content-center align-items-center flex-wrap">
-                <img src="images/logo-mmd.png" alt="">
-                <img src="images/Desain_tanpa_judul-removebg.png" alt="">
-            </div>
-        </div>
+    
         <div class="hero-2 d-flex flex-column mt-5">
             <div class="d-flex flex-column flex-wrap m-auto">
                 <h2>Ada apa saja disini?</h2>

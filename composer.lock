@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "203c5208db076b4260c6ffa88a0d7cce",
+    "content-hash": "4bd00e9ea2cabc8f313462980002528e",
     "packages": [
         {
             "name": "brick/math",
@@ -1372,6 +1372,143 @@
             "time": "2023-06-05T21:32:18+00:00"
         },
         {
+            "name": "jaybizzle/laravel-crawler-detect",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Laravel-Crawler-Detect.git",
+                "reference": "a0339574b6dfb6b82167b6c65d068d751a6e8c4d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Laravel-Crawler-Detect/zipball/a0339574b6dfb6b82167b6c65d068d751a6e8c4d",
+                "reference": "a0339574b6dfb6b82167b6c65d068d751a6e8c4d",
+                "shasum": ""
+            },
+            "require": {
+                "jaybizzle/crawler-detect": "1.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.2|^3.4",
+                "phpunit/phpunit": "^4.8|^5.5|^6.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jaybizzle\\LaravelCrawlerDetect\\LaravelCrawlerDetectServiceProvider"
+                    ],
+                    "aliases": {
+                        "Crawler": "Jaybizzle\\LaravelCrawlerDetect\\Facades\\LaravelCrawlerDetect"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\LaravelCrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "mbeech@mark-beech.co.uk"
+                }
+            ],
+            "description": "A Laravel package to detect web crawlers via the user agent",
+            "homepage": "http://github.com/JayBizzle/Laravel-Crawler-Detect",
+            "keywords": [
+                "bot",
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "detect",
+                "laravel",
+                "php crawler detect",
+                "spider",
+                "user-agent"
+            ],
+            "support": {
+                "issues": "https://github.com/JayBizzle/Laravel-Crawler-Detect/issues",
+                "source": "https://github.com/JayBizzle/Laravel-Crawler-Detect/tree/v1.3.0"
+            },
+            "time": "2022-07-06T10:42:10+00:00"
+        },
+        {
+            "name": "jeremykenedy/laravel-logger",
+            "version": "V8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/laravel-logger.git",
+                "reference": "5ea953b01d704e015c313f95867d498fcda50aa7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/laravel-logger/zipball/5ea953b01d704e015c313f95867d498fcda50aa7",
+                "reference": "5ea953b01d704e015c313f95867d498fcda50aa7",
+                "shasum": ""
+            },
+            "require": {
+                "jaybizzle/laravel-crawler-detect": "1.*",
+                "laravelcollective/html": "^5.4|^5.5|^5.6|^5.7|^5.8|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.3.0|^8.0"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jeremykenedy\\LaravelLogger\\LaravelLoggerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/App/Logic/helpers.php"
+                ],
+                "psr-4": {
+                    "jeremykenedy\\LaravelLogger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jeremykenedy",
+                    "email": "jeremykenedy@gmail.com"
+                }
+            ],
+            "description": "Laravel Logger Package",
+            "keywords": [
+                "Laravel activity",
+                "Laravel activity log",
+                "Laravel activity logger",
+                "Laravel log",
+                "laravel logger"
+            ],
+            "support": {
+                "issues": "https://github.com/jeremykenedy/laravel-logger/issues",
+                "source": "https://github.com/jeremykenedy/laravel-logger/tree/V8.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jeremykenedy",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/jeremykenedy",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2023-11-21T03:54:11+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v10.12.0",
             "source": {
@@ -1826,6 +1963,79 @@
                 "source": "https://github.com/laravel/ui/tree/v4.2.2"
             },
             "time": "2023-05-09T19:47:28+00:00"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v6.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "64ddfdcaeeb8d332bd98bef442bef81e39c3910b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/64ddfdcaeeb8d332bd98bef442bef81e39c3910b",
+                "reference": "64ddfdcaeeb8d332bd98bef442bef81e39c3910b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/routing": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/session": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/view": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": ">=7.2.5"
+            },
+            "require-dev": {
+                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~8.5|^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Collective\\Html\\HtmlServiceProvider"
+                    ],
+                    "aliases": {
+                        "Form": "Collective\\Html\\FormFacade",
+                        "Html": "Collective\\Html\\HtmlFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "https://laravelcollective.com",
+            "support": {
+                "issues": "https://github.com/LaravelCollective/html/issues",
+                "source": "https://github.com/LaravelCollective/html"
+            },
+            "abandoned": "spatie/laravel-html",
+            "time": "2023-04-25T02:46:11+00:00"
         },
         {
             "name": "league/commonmark",
