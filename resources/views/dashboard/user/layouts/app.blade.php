@@ -21,56 +21,16 @@
 </head>
 
 <body style="background-color: #f6f6f9;">
-    <div data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">
+    <div >
         <x-navbar></x-navbar>
     </div>
 
     @yield('container')
-    <x-footer></x-footer>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
-    <script>
-        AOS.init();
-        $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var query = $(this).val();
-                if (query.trim() !== '') {
-                    $.ajax({
-                        url: '{{ route('dashboard.search') }}',
-                        method: 'GET',
-                        data: {
-                            query: query
-                        },
-                        success: function(response) {
-                            $('#search-results').html(response);
-                            $('#search-results').show(); // Show the search results
-                        }
-                    });
-                } else {
-                    $('#search-results').empty();
-                    $('#search-results').hide(); // Hide the search results
-                }
-            });
-        });
-
-        $(document).ready(function() {
-            $('#category-select').on('change', function() {
-                var selectedCategory = $(this).val();
-
-                $.ajax({
-                    url: '{{ route('dashboard.filter') }}',
-                    method: 'GET',
-                    data: {
-                        category: selectedCategory
-                    },
-                    success: function(response) {
-                        $('#book-list').html(response);
-                    }
-                });
-            });
-        });
-    </script>
+   
 
 </body>
 

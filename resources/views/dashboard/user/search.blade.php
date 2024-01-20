@@ -1,4 +1,4 @@
-@if ($books->count() > 0)
+<!-- @if ($books->count() > 0)
     <div class="d-flex flex-column gap-2">
         @php $count = 0; @endphp
         @foreach ($books as $book)
@@ -20,4 +20,4 @@
 </div>
 @else
 <p>Tidak ada hasil ditemukan</p>
-@endif
+@endif -->

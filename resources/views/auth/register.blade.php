@@ -6,13 +6,13 @@
                 <a class=" {{ Request::is('register') ? 'active' : 'register-1' }}" href="/register">Register</a>
             </div>
             <div class="d-flex flex-wrap align-items-center hero">
-                <div class="text-signin d-flex flex-column gap-5 ">
+                <!-- <div class="text-signin d-flex flex-column gap-5 ">
                     <h1 class="signin ">Welcome to <br> Damsobi</h1>
                     <p>Unleash Your Imagination and Ignite Your Passion<br> for Reading with Our Vast Collection of Books
                     </p>
                 </div>
                 <div class="overlay"></div>
-                <img src="images/Picture.svg" alt="">
+                <img src="images/Picture.svg" alt=""> -->
                 <div class="form-signin mt-3 ">
 
 

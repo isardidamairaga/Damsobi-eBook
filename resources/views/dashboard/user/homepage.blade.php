@@ -1,4 +1,4 @@
-<x-app-layout title="Homepage">
+<!-- <x-app-layout title="Homepage">
     @section('container')
         <div class="d-flex flex-wrap justify-content-center align-item-center hero-1">
             <div data-aos="fade-right" data-aos-delay="300" data-aos-duration="800" class="ornamen1">
@@ -65,4 +65,4 @@
             </div>
         </div>
     @endsection
-</x-app-layout>
+</x-app-layout> -->

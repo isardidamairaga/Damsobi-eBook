@@ -8,21 +8,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                @foreach ($navbar as $name => $url)
+                <!-- @foreach ($navbar as $name => $url)
                     <li class="nav-item ">
                         <a class="nav-link me-5 {{ Request::is($url) ? 'active' : '' }}" aria-current="page"
                             href="{{ $url }}">{{ $name }} </a>
                     </li>
-                @endforeach
+                @endforeach -->
             </ul>
             <div class="d-flex align-items-center gap-5 ">
-                {{-- <input type="text" id="search-input" placeholder="Cari buku...">
-    <div id="search-results"></div> --}}
-                {{-- <form class="d-flex" role="search"> --}}
-                <input class="form-control " id="search-input" type="search"
-                    placeholder="Search book, author, category" aria-label="Search">
-                <div id="search-results" class="search-results"></div>
-                {{-- </form> --}}
                 @guest
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item ">

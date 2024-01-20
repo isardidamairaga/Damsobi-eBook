@@ -26,13 +26,14 @@ Route::as("dashboard.")
     ->prefix("dashboard")
     ->middleware(['auth','web','activity'])
     ->group(function () {
-        Route::get('/', function () {
+        // Route::get('/', function () {
             
-            return view('dashboard.user.homepage');
-        });
-        Route::get('library', [LibraryController::class, 'index'])->name("library");
-        Route::get('/search', [SearchController::class, 'index'])->name("search");
-        Route::get('/filter', [SearchController::class, 'category'])->name('filter');
+        //     return view('dashboard.user.homepage');
+        // });
+
+         Route::get('/', [LibraryController::class, 'index'])->name("library");
+        // Route::get('/search', [SearchController::class, 'index'])->name("search");
+        // Route::get('/filter', [SearchController::class, 'category'])->name('filter');
         Route::get('book/{book}', [LibraryController::class, 'show'])->name("bookpage");
         Route::get('read/{book}', [LibraryController::class, 'read'])->name("read");
     });

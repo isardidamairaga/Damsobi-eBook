@@ -6,12 +6,6 @@
                 <a class=" {{ Request::is('register') ? 'active' : 'register-1' }}" href="/register">Register</a>
             </div>
             <div class="d-flex flex-wrap align-items-center hero">
-                <div class="text-signin d-flex flex-column gap-5">
-                    <h1 class="signin ">Sign In to <br> Recharge Direct</h1>
-                    <p>if you don't an account <br> you can <a class="register" href="/register">Register here!</a></p>
-                </div>
-                <div class="overlay"></div>
-                <img src="images/Picture.svg" alt="">
                 <div class="form-signin ">
                     <form action="{{ route('login') }}" method="POST">
                         @if (session()->has('success'))
