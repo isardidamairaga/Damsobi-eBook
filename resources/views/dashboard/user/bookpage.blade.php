@@ -22,9 +22,9 @@
         </div>
         <!-- sinopsis -->
 
-        <!-- <div class="description-book">
+        <div class="description-book">
             <h1>Sinopsis</h1>
             <p>{{ $book->sinopsis }}</p>
-        </div> -->
+        </div>
     @endsection
 </x-app-layout>

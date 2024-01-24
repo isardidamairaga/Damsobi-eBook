@@ -1,4 +1,4 @@
-<!-- @foreach ($books as $book)
+@foreach ($books as $book)
     <a href="{{ route('dashboard.bookpage', ['book' => $book->id]) }}" class="link-book">
         <div class="card-book">
             <img class="cover-book" src="{{ $book->cover_url }}" alt="">
@@ -9,4 +9,4 @@
             </div>
         </div>
     </a>
-@endforeach -->
+@endforeach

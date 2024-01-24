@@ -1,14 +1,14 @@
 <x-app-layout title="Library">
     @section('container')
         <div class=" container library">
-            <!-- <div>
+            <div>
                 <select id="category-select">
                     <option value="">Semua Kategori</option>
                     @foreach ($Category as $categories)
                         <option value="{{ $categories->id }}">{{ $categories->category }}</option>
                     @endforeach
                 </select>
-            </div> -->
+            </div>
             <div id="filtered-results" class="filtered-results"></div>
             <h3 class="judul-kategori">Buku</h3>
             <div class="d-flex flex-wrap gap-4" id="book-list">
