@@ -12,7 +12,7 @@
                     <br>and let yourself be fully absorbed in unforgettable stories.
                 </p>
                 <div class="btn-explore">
-                    <a class="btn-explorer" href="/library"> <b>Explore Now</b></a>
+                    <a class="btn-explorer" href="/dashboard/library"> <b>Explore Now</b></a>
                 </div>
             </div>
             <img class="banner" src="images/Saly-3.svg" alt="">
